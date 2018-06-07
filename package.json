@@ -42,6 +42,10 @@
         "path": "./snippets/nuxt-config.json"
       },
       {
+        "language": "javascriptreact",
+        "path": "./snippets/react-snippet.json"
+      },
+      {
         "language": "plaintext",
         "path": "./snippets/plaintext.json"
       }

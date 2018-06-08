@@ -54,6 +54,34 @@
       }, {
         "language": "typescriptreact",
         "path": "./snippets/javascript.json"
+      },
+
+      {
+        "language": "javascript",
+        "path": "./snippets/react-router.json"
+      }, {
+        "language": "typescript",
+        "path": "./snippets/react-router.json"
+      }, {
+        "language": "javascriptreact",
+        "path": "./snippets/react-router.json"
+      }, {
+        "language": "typescriptreact",
+        "path": "./snippets/react-router.json"
+      },
+
+      {
+        "language": "javascript",
+        "path": "./snippets/react-snippet.json"
+      }, {
+        "language": "typescript",
+        "path": "./snippets/react-snippet.json"
+      }, {
+        "language": "javascriptreact",
+        "path": "./snippets/react-snippet.json"
+      }, {
+        "language": "typescriptreact",
+        "path": "./snippets/react-snippet.json"
       }
     ]
   }

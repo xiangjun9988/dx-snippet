@@ -28,7 +28,7 @@
         "description": "路由第4步 启动路由"
     },
     "fixed spa锚链接问题": {
-        "prefix": "dm-fix-anchor",
+        "prefix": "dm-fixed-anchor",
         "body": [
             "// 解决单页面锚链接问题\nscrollToAnchor(anchorName) {\nif (anchorName) {\n\t// 找到锚点\n\tlet anchorElement = document.getElementById(anchorName);\n\t// 如果对应id的锚点存在，就跳转到锚点\n\tif (anchorElement) {\n\tanchorElement.scrollIntoView();\n\t}\n}\n}"
         ],

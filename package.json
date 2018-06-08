@@ -3,7 +3,7 @@
   "displayName": "dx-snippet",
   "description": "针对前端提供的各种实用快捷方式",
   "icon": "images/daxiang.png",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "daxiang",
   "engines": {
     "vscode": "^1.14.0"

@@ -1,0 +1,30 @@
+{
+    "router第1步": {
+        "prefix": "dm-router-step1",
+        "body": [
+            "<ReactRouter.RouteHandler />"
+        ],
+        "description": "路由第一步 <ReactRouter.RouteHandler />"
+    },
+    "router第2步": {
+        "prefix": "dm-router-step2",
+        "body": [
+            "// 第二步 定义Route以及DefaultRoute\nvar Route = React.createFactory(ReactRouter.Route)\n// 定义默认路由\nvar DefaultRoute = React.createFactory(ReactRouter.DefaultRoute)"
+        ],
+        "description": "路由第2步定义Route以及DefaultRoute"
+    },
+    "router第3步": {
+        "prefix": "dm-router-step3",
+        "body": [
+            "// 第三步 定义规则，第一方式跟定义虚拟DOM方式是一模一样的\n// 有两个属性，一个是path定义路由规则，一个是handler定义组件的\n// 不是默认的页面组件，通过Route定义\nvar routes = (\n\t<Route path=\"/\" handler={App}>\n\t <Route path=\"start\" handler={组件名}></Route>\n\t <DefaultRoute handler={组件名} />\n\t</Route>\n)"
+        ],
+        "description": "路由第2步定义Route以及DefaultRoute"
+    },
+    "router第4步": {
+            "prefix": "dm-router-step4",
+            "body": [
+                "// 第四步 启动路由\nReactRouter.run(routes, function (Handler, params) {\n\t// 参数中path可以获取路由的路径，因此可以将他传递给父组件\n\tReact.render(<Handler page={params.path}></Handler>,document.getElementById('app'))\n})"
+            ],
+            "description": "路由第4步 启动路由"
+        }
+}

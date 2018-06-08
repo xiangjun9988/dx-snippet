@@ -1,0 +1,12 @@
+{
+   "跨域header php file_get_contents": {
+        "prefix": "dm-php-cros-header",
+        "body": [
+            "< ? php",
+            "header('Access-Control-Allow-Origin:*');",
+            "$content = file_get_contents();",
+            "echo $content;"
+        ],
+        "description": "Code snippet for  php跨域"
+    }
+}

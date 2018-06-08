@@ -2,8 +2,8 @@
   "name": "dx-snippet",
   "displayName": "dx-snippet",
   "description": "针对前端提供的各种实用快捷方式",
-  "icon": "images/vue-logo.png",
-  "version": "0.0.3",
+  "icon": "images/daxiang.png",
+  "version": "0.0.4",
   "publisher": "daxiang",
   "engines": {
     "vscode": "^1.14.0"

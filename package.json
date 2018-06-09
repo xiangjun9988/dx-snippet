@@ -3,7 +3,7 @@
   "displayName": "dx-snippet",
   "description": "针对前端提供的各种实用快捷方式",
   "icon": "images/daxiang.png",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "daxiang",
   "engines": {
     "vscode": "^1.14.0"
@@ -86,6 +86,30 @@
       {
         "language": "vue",
         "path": "./snippets/iview.json"
+      },
+
+
+      {
+        "language": "html",
+        "path": "./snippets/antd.json"
+      }, {
+        "language": "handlebars",
+        "path": "./snippets/antd.json"
+      }, {
+        "language": "razor",
+        "path": "./snippets/antd.json"
+      }, {
+        "language": "typescript",
+        "path": "./snippets/antd.json"
+      }, {
+        "language": "javascript",
+        "path": "./snippets/antd.json"
+      }, {
+        "language": "javascriptreact",
+        "path": "./snippets/antd.json"
+      }, {
+        "language": "typescriptreact",
+        "path": "./snippets/antd.json"
       }
     ]
   }

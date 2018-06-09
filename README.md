@@ -1,6 +1,6 @@
 
 
-## JavaScript Snippet Pack for Visual Studio Code
+## JavaScript Snippet Pack for Visual Studio Code VSCE
 
 ## DOM
 

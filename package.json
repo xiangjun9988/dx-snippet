@@ -3,7 +3,7 @@
   "displayName": "dx-snippet",
   "description": "针对前端提供的各种实用快捷方式",
   "icon": "images/daxiang.png",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "daxiang",
   "engines": {
     "vscode": "^1.14.0"
@@ -16,8 +16,7 @@
   "extensionDependencies": ["octref.vetur"],
   "categories": ["Snippets"],
   "contributes": {
-    "snippets": [
-      {
+    "snippets": [{
         "language": "vue",
         "path": "./snippets/vue.json"
       },
@@ -82,6 +81,11 @@
       }, {
         "language": "typescriptreact",
         "path": "./snippets/react-snippet.json"
+      },
+
+      {
+        "language": "vue",
+        "path": "./snippets/iview.json"
       }
     ]
   }

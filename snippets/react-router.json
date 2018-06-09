@@ -33,5 +33,12 @@
             "// 解决单页面锚链接问题\nscrollToAnchor(anchorName) {\nif (anchorName) {\n\t// 找到锚点\n\tlet anchorElement = document.getElementById(anchorName);\n\t// 如果对应id的锚点存在，就跳转到锚点\n\tif (anchorElement) {\n\tanchorElement.scrollIntoView();\n\t}\n}\n}"
         ],
         "description": "解决SPA单页面锚链接使用问题"
+    },
+    "dm-ajax-param": {
+        "prefix": "dm-ajax-param",
+        "body": [
+            "// 定义工具方法\nlet Util = {\n\t/**\n\t * 发送异步请求\n\t * @url \t请求的地址\n\t * @fn \t\t请求成功时候的回调函数\n\t **/\n\tajax(url, fn) {\n\t\t// 实例化xhr对象\n\t\tlet xhr = new XMLHttpRequest();\n\t\t// 监听状态变化\n\t\txhr.onreadystatechange = () => {\n\t\t\t// 监听数据请求完毕\n\t\t\tif (xhr.readyState === 4) {\n\t\t\t\t// 判断状态码\n\t\t\t\tif (xhr.status === 200) {\n\t\t\t\t\t// 将数据转化成json字符串\n\t\t\t\t\tfn && fn(JSON.parse(xhr.responseText))\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t// 打开请求\n\t\txhr.open('GET', url, true);\n\t\t// 发送数据\n\t\txhr.send(null)\n\t},\n\t/**\n\t * 将对象转化成query的形式\n\t * @obj \t转化的对象 {color:red, num:100}\n\t * return \t?color=red&num=100\n\t **/\n\tobjToQuery(obj) {\n\t\tlet result = '';\n\t\t// 遍历对象，转化成json\n\t\tfor (var i in obj) {\n\t\t\tresult += '&' + i + '=' + obj[i]\n\t\t}\n\t\t// 去除最后一个&\n\t\treturn '?' + result.slice(1)\n\t}\n}"
+        ],
+        "description": "将对象转化成query的形式"
     }
 }

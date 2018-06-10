@@ -8,5 +8,19 @@
             "echo $content;"
         ],
         "description": "Code snippet for  php跨域"
+    },
+    "服务器跨域2": {
+        "prefix": "dm-php-cros3",
+        "body": [
+            "header('Access-Control-Allow-Origin:*');"
+        ],
+        "description": "服务器跨域2"
+    },
+    "dm-php-mysql-select": {
+        "prefix": "dm-php-mysql-select",
+        "body": [
+            "<?php\n// 第一步：连接数据库 类似打开数据库\n\\$db = mysqli_connect(\"localhost\",\"root\",\"\",\"kaoshi\"); \nif (!\\$db){\n\tdie('Could not connect: ' . mysql_error());\n}\nmysqli_query(\\$db,'set names utf8'); \n\n\n// 第二步：编写sql语句 类似编写查询\n\\$sql = \"select * from x2_app\";\n\n// 第三步：执行SQL语句，返回结果\n\\$reslut = \\$db->query(\\$sql);\n\\$arr = array();\nwhile(\\$attr = \\$reslut->fetch_row()){\n\tarray_push(\\$arr,\\$attr);\n}\nvar_dump(\\$arr);\n\n// 第四步：关闭数据库\nmysqli_close(\\$db);"
+        ],
+        "description": "dm-php-mysql-select"
     }
 }

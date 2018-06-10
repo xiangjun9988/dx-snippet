@@ -1,76 +1,76 @@
 {
     "vue template init": {
-        "prefix": "V",
+        "prefix": "dm-iv-V",
         "body": [
             "<template>\n\n</template>\n\n<script>\nexport default {\n\tname: '${1:name}',\n\tdata: function() {\t\n\t\treturn {}\n\t},\n\tmethods: {}\n}\n</script>\n\n<style scoped>\n\n</style>"
         ],
         "description": "Quickly generate vue component templates"
     },
     "ivew row": {
-        "prefix": "Row",
+        "prefix": "dm-iv-Row",
         "body": [
             "<Row>\n\t$1\n</Row>"
         ],
         "description": "Quickly generate iview row"
     },
     "ivew col": {
-        "prefix": "Col",
+        "prefix": "dm-iv-Col",
         "body": [
             "<Col span=\"$1\">\n\t$2\n</Col>"
         ],
         "description": "Quickly generate iview span"
     },
     "ivew button": {
-        "prefix": "Button",
+        "prefix": "dm-iv-Button",
         "body": [
             "<Button type=\"${1:primary}\">$2</Button>"
         ],
         "description": "Quickly generate iview button"
     },
     "ivew input": {
-        "prefix": "Input",
+        "prefix": "dm-iv-Input",
         "body": [
             "<Input v-model=\"${1}\" placeholder=\"${2}\"></Input>"
         ],
         "description": "Quickly generate iview input"
     },
     "ivew input number": {
-        "prefix": "Inputnumber",
+        "prefix": "dm-iv-Inputnumber",
         "body": [
             "<Input-number :max=\"${1:10}\" :min=\"${2:1}\" v-model=\"${3:model}\"></Input-number>"
         ],
         "description": "Quickly generate iview input number"
     },
     "ivew table": {
-        "prefix": "Table",
+        "prefix": "dm-iv-Table",
         "body": [
             "<Table :columns=\"${1:column}\" :data=\"${2:data}\"></Table>"
         ],
         "description": "Quickly generate iview table"
     },
     "ivew select": {
-        "prefix": "Select",
+        "prefix": "dm-iv-Select",
         "body": [
             "<Select v-model=\"${1:model}\">\n\t<Option v-for=\"${2:item} in ${3:list}\" :value=\"${4:value}\" :key=\"item\">${5}</Option>\n</Select>"
         ],
         "description": "Quickly generate iview select"
     },
     "ivew datetime picker": {
-        "prefix": "Datepicker",
+        "prefix": "dm-iv-Datepicker",
         "body": [
             "<Date-picker type=\"datetime\" format=\"yyyy/MM/dd HH:mm\" placeholder=\"选择日期和时间\"></Date-picker>"
         ],
         "description": "Quickly generate iview datetime picker"
     },
     "ivew upload": {
-        "prefix": "Upload",
+        "prefix": "dm-iv-Upload",
         "body": [
             "<Upload action=\"${1}\">\n\t<Button type=\"ghost\" icon=\"ios-cloud-upload-outline\">上传文件</Button>\n</Upload>"
         ],
         "description": "Quickly generate iview upload"
     },
     "ivew message": {
-        "prefix": "Message",
+        "prefix": "dm-iv-Message",
         "body": [
             "this.$$Message.info('${1}');"
         ],

@@ -19,7 +19,7 @@
     "dm-php-mysql-select": {
         "prefix": "dm-php-mysql-select",
         "body": [
-            "<?php\n// 第一步：连接数据库 类似打开数据库\n\\$db = mysqli_connect(\"localhost\",\"root\",\"\",\"kaoshi\"); \nif (!\\$db){\n\tdie('Could not connect: ' . mysql_error());\n}\nmysqli_query(\\$db,'set names utf8'); \n\n\n// 第二步：编写sql语句 类似编写查询\n\\$sql = \"select * from x2_app\";\n\n// 第三步：执行SQL语句，返回结果\n\\$reslut = \\$db->query(\\$sql);\n\\$arr = array();\nwhile(\\$attr = \\$reslut->fetch_row()){\n\tarray_push(\\$arr,\\$attr);\n}\nvar_dump(\\$arr);\n\n// 第四步：关闭数据库\nmysqli_close(\\$db);"
+            "<?php \nheader(\"Content-type:text/html;charset=utf-8\");//字符编码设置 \n// 第一步：连接数据库 类似打开数据库\n\\$con = mysqli_connect(\"114.215.87.206\",\"demo_edu\",\"demo_edu\",\"demo_edu\"); \n\n// 第二步：编写sql语句 类似编写查询\n\\$sql = \"SELECT * FROM news_list\"; \nmysqli_query(\\$con,'set names utf8'); \n\n// 第三步：执行SQL语句，并处理数据\n\\$result = mysqli_query(\\$con,\\$sql); \nif (!\\$result) {\n\tdie('Could not connect: ' . mysql_error());\n}\n\n\\$jarr = array();\nwhile (\\$rows=mysqli_fetch_array(\\$result,MYSQL_ASSOC)){\n\t\\$count=count(\\$rows);//不能在循环语句中，由于每次删除 row数组长度都减小 \n\tfor(\\$i=0;\\$i<\\$count;\\$i++){ \n\t\tunset(\\$rows[\\$i]);//删除冗余数据 \n\t}\n\tarray_push(\\$jarr,\\$rows);\n}\n\n//实例化stdclass，这是php内置的空类，可以用来传递数据，由于json_encode后的数据是以对象数组的形式存放的，\n\\$jobj=new stdclass();\n//所以我们生成的时候也要把数据存储在对象中\nforeach(\\$jarr as \\$key=>\\$value){\n\t\\$jobj->\\$key=\\$value;\n}\n//组装返回数据并关闭数据库\n\\$data['errno'] = 0;\n\\$data['list'] = \\$jarr; \n\\$str = json_encode(\\$data);//将数组进行json编码\necho \\$str;\n\n// 第四步：关闭数据库\nmysqli_close(\\$con);\n?>"
         ],
         "description": "dm-php-mysql-select"
     }

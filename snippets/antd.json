@@ -563,5 +563,43 @@
             ""
         ],
         "description": ""
+    },
+    "rem64计算单位欸": {
+        "prefix": "dm-rem64",
+        "body": [
+            "<script type=\"text/javascript\">\n\t\tdocument.documentElement.style.fontSize = (document.documentElement.clientWidth / 640) * 100 + 'px';\n</script>"
+        ],
+        "description": "rem64计算单位欸"
+    },
+    "fis3 conf配置": {
+        "prefix": "dm-fis3-conf",
+        "body": [
+            "// 编译less\nfis.match('**.less', {\n\tparser: 'less',\n\trExt: '.css'\n})"
+        ],
+        "description": "dm-fis3-conf"
+    },
+    "获得路由params ": {
+        "scope": "javascript,typescript",
+        "prefix": "dm-r-params",
+        "body": [
+            "let params = this.props.match.params;"
+        ],
+        "description": "react router get params"
+    },
+    "导入BrowserRouter, Route, Link": {
+        "scope": "javascript,typescript",
+        "prefix": "dm-r-step1-router-link",
+        "body": [
+            "import {\n BrowserRouter as Router,\n Route,\n Link\n} from 'react-router-dom';"
+        ],
+        "description": "导入BrowserRouter, Route, Link"
+    },
+    "配置路由导航": {
+        "scope": "javascript,typescript",
+        "prefix": "dm-r-step2-config",
+        "body": [
+            "\t\t<Router>\n\t\t <div className=\"router-box\">\n\t\t\t <div>\n\t\t\t\t<a href=\"/news\">新闻</a>\n\t\t\t\t<a href=\"/detail/2\">详情</a>\n\t\t\t\t<a href=\"/comment/3\">评论</a>\n\t\t\t </div>\n\t\t\t <br/>\n\t\t\t <div>\n\t\t\t\t<Link to=\"/news\">新闻</Link>\n\t\t\t\t<Link to=\"/detail/2\">详情</Link>\n\t\t\t\t<Link to=\"/comment/3\">评论</Link>\n\t\t\t </div>\n\t\t\t <br/>\n\t\t\t <Route path=\"/news\" component={News}/>\n\t\t\t <Route path=\"/detail/:id\" component={Detail}/>\n\t\t\t <Route path=\"/comment/:id\" component={Comment}/>\n\t\t\t</div>\n\t\t </Router>"
+        ],
+        "description": "配置路由导航"
     }
 }

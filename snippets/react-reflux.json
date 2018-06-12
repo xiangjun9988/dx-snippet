@@ -1,0 +1,53 @@
+{
+    // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+    // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+    // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+    // used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+    // Placeholders with the same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"scope": "javascript,typescript",
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+    "编写reflux actions 第一步": {
+        "prefix": "dm-reflux-step1-actions",
+        "body": [
+            "import Reflux from 'reflux';\n// 编写actions,通过reflux创建\nvar ${1:News}Actions = Reflux.createActions([\n\t// 提供两个方方，去操作store\n\t'refresh', //点击刷新新闻，在头部组件调用\n\t'addItem'// 点击添加一条数据，在头部组件调用\n]);\n\nexport default ${2:News}Actions;"
+        ],
+        "description": "编写reflux actions"
+    },
+    "编写reflux stores 第二步": {
+        "prefix": "dm-reflux-step22-stores",
+        "body": [
+            "import Reflux from 'reflux';\nimport NewsActions from './Actions.js';\n\n/* 1. 初始化(init)里生成默认数据 */\n/* 2. 某react的组件获取数据的时候走到getInitialState，去后台获取数据（仅一次） */\n/* 3. 之后由于用this.data.pristine置位过，数据会直接从getInitialState流到react组件，而不会再去服务器获取 */\n/* P.S. 谨慎使用或者干脆禁用开发者从component上自己调用服务器获取数据 */\nconst NewsStores = Reflux.createStore({\n\tlistenables: [NewsActions],\n\trefresh: function () { // 监听跟这个方法\n\t\tthis.updateList(this.list);\n\t},\n\taddItem: function () { // 监听跟这个方法\n\t\t// this.list.push();\n\t\tthis.updateList(this.list);\n\n\t},\n\t// called whenever we change a list. normally this would mean a database API call\n\tupdateList: function (list) {\n\t\t// if we used a real database, we would likely do the below in a callback\n\t\tthis.list = list;\n\t\tthis.trigger(list); // sends the updated list to all listening components (TodoApp)\n\t},\n\t// this will be called by all listening components as they register their listeners\n\t// getInitialState是react组件初始化时必须调用的方法，这里给组件提供数据\n\tgetInitialState: function () {\n\t\t\n\t}\n})\n\nexport default NewsStores;"
+        ],
+        "description": "编写reflux stores"
+    },
+    "编写reflux stores 第二步 精简版": {
+        "prefix": "dm-reflux-step2-stores",
+        "body": [
+            "import Reflux from 'reflux';\nimport ${1:NewsActions} from './Actions.js';\n\n/* 1. 初始化(init)里生成默认数据 */\n/* 2. 某react的组件获取数据的时候走到getInitialState，去后台获取数据（仅一次） */\n/* 3. 之后由于用this.data.pristine置位过，数据会直接从getInitialState流到react组件，而不会再去服务器获取 */\n/* P.S. 谨慎使用或者干脆禁用开发者从component上自己调用服务器获取数据 */\nconst ${3:NewsStores} = Reflux.createStore({\n\tlistenables: [${2:NewsActions}],\n\trefresh: function () { // 监听跟这个方法\n\t\tthis.updateList(this.list);\n\t},\n\taddItem: function () { // 监听跟这个方法\n\t\t// this.list.push();\n\t\tthis.updateList(this.list);\n\n\t},\n\t// called whenever we change a list. normally this would mean a database API call\n\tupdateList: function (list) {\n\t\t// if we used a real database, we would likely do the below in a callback\n\t\tthis.list = list;\n\t\tthis.trigger(list); // sends the updated list to all listening components (TodoApp)\n\t}\n})\n\nexport default ${3:NewsStores};"
+        ],
+        "description": "编写reflux stores 第二步 精简版"
+    },
+    "编写store与component关联 第三步": {
+        "prefix": "dm-reflux-step3-listener",
+        "body": [
+            "// 第三步监听, 下面编写变化方法，接受改变参数\nthis.unsubscribe = ${1:Store}.listen(this.onChange.bind(this));"
+        ],
+        "description": "在componentDidMount钩子中，编写store与component关联 第三步"
+    },
+    "编写reflux onChange接受参数 第四步": {
+        "prefix": "dm-reflux-step4-change",
+        "body": [
+            "\t// 可以接受多个参数，对应trigger(参数1,参数2)\n\tonChange(list) {\n\t\tthis.setState({\n\t\t\tlist: list\n\t\t}); // re-render\n\t}"
+        ],
+        "description": "编写reflux onChange接受参数 并更新state，更新视图"
+    }
+}

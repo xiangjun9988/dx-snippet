@@ -40,5 +40,56 @@
             "// 定义工具方法\nlet Util = {\n\t/**\n\t * 发送异步请求\n\t * @url \t请求的地址\n\t * @fn \t\t请求成功时候的回调函数\n\t **/\n\tajax(url, fn) {\n\t\t// 实例化xhr对象\n\t\tlet xhr = new XMLHttpRequest();\n\t\t// 监听状态变化\n\t\txhr.onreadystatechange = () => {\n\t\t\t// 监听数据请求完毕\n\t\t\tif (xhr.readyState === 4) {\n\t\t\t\t// 判断状态码\n\t\t\t\tif (xhr.status === 200) {\n\t\t\t\t\t// 将数据转化成json字符串\n\t\t\t\t\tfn && fn(JSON.parse(xhr.responseText))\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t// 打开请求\n\t\txhr.open('GET', url, true);\n\t\t// 发送数据\n\t\txhr.send(null)\n\t},\n\t/**\n\t * 将对象转化成query的形式\n\t * @obj \t转化的对象 {color:red, num:100}\n\t * return \t?color=red&num=100\n\t **/\n\tobjToQuery(obj) {\n\t\tlet result = '';\n\t\t// 遍历对象，转化成json\n\t\tfor (var i in obj) {\n\t\t\tresult += '&' + i + '=' + obj[i]\n\t\t}\n\t\t// 去除最后一个&\n\t\treturn '?' + result.slice(1)\n\t}\n}"
         ],
         "description": "将对象转化成query的形式"
+    },
+
+
+    "redux demo no.1 reducer": {
+        "prefix": "dm-redux-no1-demo",
+        "body": [
+            "// 第一步：定义reducer修改状态\nconst reducer = (initialState = 0, action) => {\n\tif (action.type === \"INC\") {\n\treturn initialState + 1;\n\t} else if (action.type === \"DEC\") {\n\treturn initialState - 1;\n\t}\n\treturn initialState;\n}\n// 第二步：创建并监听store\nconst store = createStore(reducer, 1)\nstore.subscribe(() => {\n\tconsole.log(\"store changed\", store.getState());\n})\n// 第三步：通过dispatch触发action\nstore.dispatch({type: \"INC\"})\nstore.dispatch({type: \"INC\"})\nstore.dispatch({type: \"INC\"})\nstore.dispatch({type: \"DEC\"})\nstore.dispatch({type: \"DEC\"})\nstore.dispatch({type: \"DEC\"})"
+        ],
+        "description": "单个reducer案例"
+    },
+    "redux demo no.2 multiple-reducer": {
+        "prefix": "dm-redux-no2-demo",
+        "body": [
+            "// 第一步：定义reducer\n// 1个Reducer\nconst userReducer = (state={}, action) => {\n switch(action.type) {\n\tcase \"SET_NAME\": {\n\t return {...state, name: action.payload};\n\t break;\n\t}\n\tcase \"SET_AGE\": {\n\t return {...state, age: action.payload};\n\t break;\n\t}\n }\n return state;\n}\n\n// 1个reducer\nconst newsReducer = (state=[], action) => {\n switch(action.type) {\n\tcase \"ADD_NEWS\": {\n\t return state.concat({\n\t\tid: Date.now(), //fake an ID by using a timestamp\n\t\ttext: action.payload,\n\t });\n\t break;\n\t}\n }\n return state;\n}\n// 多个reducer合并\nconst reducers = combineReducers({\n user: userReducer,\n news: newsReducer\n})\n// 第二步：创建并监听store\nconst store = createStore(reducers)\n\nstore.subscribe(() => {\n console.log(\"store changed\", store.getState());\n})\n// 第三步：通过dispatch触发action\nstore.dispatch({type: \"SET_NAME\", payload: \"大象\"})\nstore.dispatch({type: \"SET_AGE\", payload: 35})\nstore.dispatch({type: \"SET_AGE\", payload: 34})\nstore.dispatch({type: \"ADD_NEWS\", payload: \"我有一个小猫咪\"})\nstore.dispatch({type: \"ADD_NEWS\", payload: \"从来不哭泣\"})"
+        ],
+        "description": "多个reducer案例, combineReducers"
+    },
+    "redux demo no.2 imp": {
+        "prefix": "dm-redux-no2-imp",
+        "body": [
+            "import { combineReducers, createStore } from \"redux\";"
+        ],
+        "description": "import combineReducers, createStore"
+    },
+    "redux demo no.3 applyMiddleware": {
+        "prefix": "dm-redux-no3-demo-applyMiddleware",
+        "body": [
+            "\t\t// 第一步：reducer单元\n\t\tconst reducer = (initialState=0, action) => {\n\t\t if (action.type === \"INC\") {\n\t\t\treturn initialState + 1;\n\t\t } else if (action.type === \"DEC\") {\n\t\t\treturn initialState - 1;\n\t\t } else if (action.type === \"MULT\") {\n\t\t\tthrow new Error(\"啊，出错了!!\");\n\t\t }\n\t\t return initialState;\n\t\t}\n\t\t// 搞点事件比如logger\n\t\tconst logger = (store) => (next) => (action) => {\n\t\t console.log(\"日志打印\", action);\n\t\t return next(action);\n\t\t};\n\t\t\n\t\t// 搞事情errorHandler处理\n\t\tconst errorHandler = (store) => (next) => (action) => {\n\t\t try {\n\t\t\treturn next(action);\n\t\t } catch(e) {\n\t\t\tconsole.log(\"ERROR!\", e);\n\t\t }\n\t\t};\n\t\t// action之后，reducer结束之前(return)，搞点事件。比如logger,比如errorHandler处理\n\t\tconst middleware = applyMiddleware(\n\t\t logger,\n\t\t errorHandler\n\t\t)\n\n\t\t// 第二步：创建并订阅store\n\t\tconst store = createStore(reducer, middleware)\n\t\t\n\t\tstore.subscribe(() => {\n\t\t console.log(\"store changed\", store.getState());\n\t\t})\n\t\t// 第三步：通过dispatch触发action\n\t\tstore.dispatch({type: \"INC\"})\n\t\tstore.dispatch({type: \"INC\"})\n\t\tstore.dispatch({type: \"INC\"})\n\t\tstore.dispatch({type: \"DEC\"})\n\t\tstore.dispatch({type: \"DEC\"})\n\t\tstore.dispatch({type: \"DEC\"})\n\t\tstore.dispatch({type: \"MULT\"})\n\t\tstore.dispatch({type: \"DEC\"})"
+        ],
+        "description": "操作和状态改变中间，架桥拦截：applyMiddleware"
+    },
+    "redux demo no.4 imp": {
+        "prefix": "dm-redux-no3-imp",
+        "body": [
+            "import { applyMiddleware, createStore } from \"redux\";"
+        ],
+        "description": "applyMiddleware,createStore"
+    },
+    "redux demo no.4 async-promise-logger": {
+        "prefix": "dm-redux-no4-demo",
+        "body": [
+            "const initialState = {\n fetching: false,\n fetched: false,\n users: [],\n error: null,\n};\n// 第一步：定义reduer\n// 1个reducer\nconst reducer = (state=initialState, action) => {\n switch (action.type) {\n\tcase \"FETCH_USERS_PENDING\": {\n\t return {...state, fetching: true}\n\t break;\n\t}\n\tcase \"FETCH_USERS_REJECTED\": {\n\t return {...state, fetching: false, error: action.payload}\n\t break;\n\t}\n\tcase \"FETCH_USERS_FULFILLED\": {\n\t return {\n\t\t...state,\n\t\tfetching: false,\n\t\tfetched: true,\n\t\tusers: action.payload,\n\t }\n\t break;\n\t}\n }\n return state\n}\n// 在action之后，reducer之前，搞点事件。比如请求数据promise，thunk,打印日志logger\nconst middleware = applyMiddleware(promise(), thunk, logger())\n\n// 第二步：创建并监听store 此处未监听\nconst store = createStore(reducer, middleware)\n\n// 第三步：通过dispatch触发action\nstore.dispatch({\n type: \"FETCH_USERS\",\n payload: axios.get(\"http://rest.learncode.academy/api/wstern/users\")\n})\n"
+        ],
+        "description": "异步请求-日志-promise语法"
+    },
+    "redux demo no4 引入插件": {
+        "prefix": "dm-redux-no4-imp",
+        "body": [
+            "// 引入插件 redux-logger, axios, redux-thun, redux-promise-middleware\nimport { applyMiddleware, createStore } from \"redux\";\nimport axios from \"axios\";\nimport logger from \"redux-logger\";\nimport thunk from \"redux-thunk\";\nimport promise from \"redux-promise-middleware\";"
+        ],
+        "description": "引入插件 redux-logger, axios, redux-thun, redux-promise-middleware"
     }
 }
